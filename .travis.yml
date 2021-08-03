@@ -1,0 +1,13 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+
+before_install:
+  #-t zum Taggen und weiterverwenden
+  - docker build -t saho87/docker-react -f Dockerfile.dev .
+
+script:
+  #-e CI=true beendet den Test automatisch (sonst würden wir im Testbildschirm festhängen)
+  - docker run -e CI=true sas
