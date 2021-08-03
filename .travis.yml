@@ -10,4 +10,4 @@ before_install:
 
 script:
   #-e CI=true beendet den Test automatisch (sonst würden wir im Testbildschirm festhängen)
-  - docker run -e CI=true sas
+  - docker run -e CI=true saho87/docker-react npm run test
