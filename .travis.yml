@@ -28,5 +28,4 @@ deploy:
     branch: master
   # in Travis-CI festgelegt:
   access_key_id: $AWS_ACCESS_KEY
-  secure_access_key:
-    secure: "$AWS_SECRET_KEY"
+  secure_access_key: $AWS_SECRET_KEY
