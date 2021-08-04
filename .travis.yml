@@ -5,9 +5,28 @@ services:
 
 
 before_install:
-  #-t zum Taggen und weiterverwenden
+  # -t zum Taggen und weiterverwenden
   - docker build -t saho87/docker-react -f Dockerfile.dev .
 
 script:
-  #-e CI=true beendet den Test automatisch (sonst würden wir im Testbildschirm festhängen)
+  # -e CI=true beendet den Test automatisch (sonst würden wir im Testbildschirm festhängen)
   - docker run -e CI=true saho87/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  # aus der url von aws
+  region: "us-east-2"
+  # Anwendungsname (aus aws)
+  app: "docker-react"
+  # Umgebungsname (aus aws)
+  env: "Dockerreact-env"
+  # Bucket_name steht bei Services -> S3
+  bucket_name: "elasticbeanstalk-us-east-2-999217823059"
+  bucket_path: "docker-react"
+  on:
+    #nur wenn der master-Zweig gepullt wird, soll deployment erfolgen
+    branch: master
+  # in Travis-CI festgelegt:
+  access_key_id: $AWS_ACCESS_KEY
+  secure_access_key:
+    secure: "$AWS_SECRET_KEY"
