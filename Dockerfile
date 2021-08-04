@@ -6,7 +6,9 @@ COPY . .
 RUN npm run build
  
 FROM nginx
-#kopiert nur den Ordner build aus Block1 in den nginx Container
-#Zweck: alles andere wird nicht benötigt und kopiert
+# für elastic beanstalk: Port 80 soll automatisch gemappt werden
+EXPOSE 80
+# kopiert nur den Ordner build aus Block1 in den nginx Container
+# Zweck: alles andere wird nicht benötigt und kopiert
 COPY --from=0 /app/build /usr/share/nginx/html
-#nginx wird automatisch gestartet
+# nginx wird automatisch gestartet
